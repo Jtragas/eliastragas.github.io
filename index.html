@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elias Tragas — AI & Robotics Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0c;
+  --surface: #111114;
+  --border: #1e1e24;
+  --text: #e8e6e1;
+  --text-muted: #8a8a94;
+  --accent: #c4f042;
+  --accent-dim: #c4f04218;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── HERO ── */
+header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 80px 0;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s ease both;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--text);
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+h1 .accent { color: var(--accent); }
+
+.subtitle {
+  font-size: 20px;
+  color: var(--text-muted);
+  margin-top: 28px;
+  max-width: 540px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-meta {
+  margin-top: 48px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.hero-meta a, .hero-meta span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s;
+}
+.hero-meta a:hover { color: var(--accent); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 48px;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+p.body-text {
+  color: var(--text-muted);
+  font-size: 17px;
+  max-width: 600px;
+  margin-bottom: 16px;
+}
+
+/* ── TIMELINE ── */
+.timeline { margin-top: 56px; }
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 32px;
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.timeline-item:hover { background: var(--accent-dim); margin: 0 -24px; padding-left: 24px; padding-right: 24px; border-radius: 8px; }
+
+.timeline-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-top: 4px;
+  white-space: nowrap;
+}
+
+.timeline-role {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.timeline-company {
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.timeline-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── DOMAINS ── */
+.domains {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.domain-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.domain-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.domain-card h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.domain-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ── FOOTER / CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 { margin-bottom: 16px; }
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+}
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+footer {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ── PRESS ── */
+.press-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 32px;
+  text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s;
+  margin-top: 32px;
+}
+.press-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.press-source {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.press-source .forbes-f { color: var(--text); font-family: var(--serif); font-size: 16px; letter-spacing: 0; text-transform: none; margin-right: 8px; }
+.press-headline {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+.press-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.press-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+/* ── CAUSES ── */
+.cause-tag {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 100px;
+  transition: border-color 0.25s, color 0.25s;
+}
+.cause-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── HERO LAYOUT ── */
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.hero-photo {
+  width: 240px;
+  height: 240px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  animation: fadeUp 0.8s 0.5s ease both;
+  transition: transform 0.4s;
+}
+.hero-photo:hover { transform: scale(1.03); }
+
+@media (max-width: 640px) {
+  .hero-content { grid-template-columns: 1fr; text-align: center; }
+  .hero-photo { width: 180px; height: 180px; margin: 0 auto 24px; order: -1; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+  .hero-meta { flex-direction: column; gap: 16px; }
+  section { padding: 64px 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header>
+    <span class="tag">Coming Soon</span>
+    <div class="hero-content">
+      <div>
+        <h1>Elias<br>Tragas<span class="accent">.</span></h1>
+        <p class="subtitle">Research-oriented software engineer building the future of physical AI — from recommendation systems to autonomous robots and embodied intelligence.</p>
+        <div class="hero-meta">
+          <span>📍 San Francisco Bay Area</span>
+          <span>🤖 Member of Technical Staff @ Generalist AI</span>
+        </div>
+      </div>
+      <img src="elias-hero.jpg" alt="Elias Tragas" class="hero-photo">
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="reveal">
+    <div class="section-label">About</div>
+    <h2>Engineering intelligence<br>into the physical world</h2>
+    <p class="body-text">I build systems that help machines understand, learn from, and act in the real world. My work spans ML infrastructure, large-scale recommendations, NLP, and autonomous robotics — from Google-scale systems to early-stage startups pushing the boundaries of embodied AI.</p>
+    <p class="body-text">Currently at Generalist AI, I'm part of the team developing general-purpose foundation models for robots — enabling machines to learn from real-world data and adapt to new tasks with remarkable efficiency.</p>
+  </section>
+
+  <!-- PRESS -->
+  <section class="reveal">
+    <div class="section-label">In the Press</div>
+    <h2>Building robots that<br>make headlines</h2>
+    <p class="body-text">Elias is part of the Generalist AI team whose work was recently featured as a Forbes Daily Cover story — profiling how the company is applying AI scaling principles to physical robotics.</p>
+    <a href="https://www.forbes.com/sites/annatong/2026/04/02/generalist-is-betting-its-robot-training-gloves-will-usher-in-robotics-chatgpt-moment/" target="_blank" class="press-card">
+      <span class="press-badge">Daily Cover</span>
+      <div class="press-source"><span class="forbes-f">Forbes</span> · Innovation</div>
+      <div class="press-headline">Generalist Is Betting Its Robot-Training Gloves Will Usher In Robotics' ChatGPT Moment</div>
+      <div class="press-meta">By Anna Tong · April 2, 2026</div>
+    </a>
+    <a href="https://www.therobotreport.com/generalist-introduces-gen-1-general-purpose-model-for-physical-ai/" target="_blank" class="press-card">
+      <div class="press-source">The Robot Report</div>
+      <div class="press-headline">Generalist Introduces GEN-1 General-Purpose Model for Physical AI</div>
+      <div class="press-meta">April 3, 2026</div>
+    </a>
+  </section>
+
+  <!-- DOMAINS -->
+  <section class="reveal">
+    <div class="section-label">Domains</div>
+    <h2>Areas of expertise</h2>
+    <div class="domains">
+      <div class="domain-card">
+        <h3>Autonomous Robotics</h3>
+        <p>Embodied foundation models, physical AI, autonomous vehicles, and real-world perception systems.</p>
+      </div>
+      <div class="domain-card">
+        <h3>Machine Learning Infrastructure</h3>
+        <p>Distributed training at scale, ML pipelines, model serving, and production systems.</p>
+      </div>
+      <div class="domain-card">
+        <h3>NLP & Transformers</h3>
+        <p>Transformer architectures, mixed-precision training, long-sequence models, and classification systems.</p>
+      </div>
+      <div class="domain-card">
+        <h3>Recommendations</h3>
+        <p>Large-scale recommendation engines, probabilistic search, and real-time inference in C++ and Python.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="reveal">
+    <div class="section-label">Experience</div>
+    <h2>A decade of building<br>intelligent systems</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">2025 — Present</div>
+        <div>
+          <div class="timeline-role">Member of Technical Staff</div>
+          <div class="timeline-company">Generalist AI</div>
+          <div class="timeline-desc">Building general-purpose embodied foundation models for robotics. Part of the team behind GEN-1, which achieves 99% task success rates and 3x faster completion than prior approaches — trained on half a million hours of real-world data.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — 2025</div>
+        <div>
+          <div class="timeline-role">Senior Staff TLM</div>
+          <div class="timeline-company">Stack AV</div>
+          <div class="timeline-desc">Technical leadership in autonomous vehicle ML systems in the San Francisco Bay Area.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2022 — 2024</div>
+        <div>
+          <div class="timeline-role">Staff ML Engineer, ML Infrastructure</div>
+          <div class="timeline-company">Cruise</div>
+          <div class="timeline-desc">Led ML infrastructure initiatives for autonomous driving, building scalable systems for model training and deployment.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2020 — 2022</div>
+        <div>
+          <div class="timeline-role">ML Software Engineer</div>
+          <div class="timeline-company">Google</div>
+          <div class="timeline-desc">Machine learning engineering across Google-scale systems in the San Francisco Bay Area.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2018 — 2020</div>
+        <div>
+          <div class="timeline-role">Machine Learning Engineer</div>
+          <div class="timeline-company">Fathom</div>
+          <div class="timeline-desc">NLP research focused on training speed and accuracy — mixed-precision transformers, multi-label classification, and long-sequence architectures supporting 40–60k tokens.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2017 — 2018</div>
+        <div>
+          <div class="timeline-role">Software Engineer, ML Team</div>
+          <div class="timeline-company">Snapchat</div>
+          <div class="timeline-desc">Designed probabilistic search algorithms (Python → C++ inference) and built large-scale recommendation systems with Spark.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2016</div>
+        <div>
+          <div class="timeline-role">SDE Intern</div>
+          <div class="timeline-company">Amazon</div>
+          <div class="timeline-desc">Automated backend warehouse setup workflows, reducing task execution time by 98% — from one hour to one minute.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="reveal">
+    <div class="section-label">Education & Research</div>
+    <h2>University of Toronto</h2>
+    <p class="body-text" style="font-size:15px; color:var(--accent); margin-bottom:20px;">B.Sc. — Computer Science (A.I. Specialist) & Cognitive Science · Math Minor · 2013–2017</p>
+    <p class="body-text">Undergraduate researcher and NSERC CREATE-UAV recipient. Built a constant-time inference recommendation platform using mutually recursive RNNs. Research on autonomous indoor mapping with MAVs and neural visual odometry under professors David Duvenaud and Raquel Urtasun.</p>
+    <p class="body-text">Beyond ML, Elias has deep interests in cognitive science, philosophy of mind, and entropy-based models of life.</p>
+    <p class="body-text" style="margin-top:8px; font-size:14px; color: var(--text-muted);">Teaching assistant for Machine Learning (CSC411), Mathematical Reasoning (CSC165), and Computational Thinking (CSC104).</p>
+  </section>
+
+  <!-- SIDE PROJECTS -->
+  <section class="reveal">
+    <div class="section-label">Side Projects</div>
+    <h2>Things built for fun</h2>
+    <div class="domains">
+      <div class="domain-card">
+        <h3>Track Car</h3>
+        <p>Built a track-ready car from the ground up.</p>
+      </div>
+      <div class="domain-card">
+        <h3>EEG Light Show</h3>
+        <p>A light show driven by brainwave signals via EEG.</p>
+      </div>
+      <div class="domain-card">
+        <h3>SSH Synthesizer</h3>
+        <p>A synthesizer controlled remotely through SSH.</p>
+      </div>
+    </div>
+    <img src="elias-fun.jpg" alt="Elias in kaleidoscope glasses" style="width:100%;max-width:500px;border-radius:12px;margin-top:40px;border:1px solid var(--border);opacity:0.85;">
+  </section>
+
+  <!-- CAUSES -->
+  <section class="reveal">
+    <div class="section-label">Causes</div>
+    <h2>What matters</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;">
+      <span class="cause-tag">Civil Rights & Social Action</span>
+      <span class="cause-tag">Economic Empowerment</span>
+      <span class="cause-tag">Education</span>
+      <span class="cause-tag">Health</span>
+      <span class="cause-tag">Human Rights</span>
+      <span class="cause-tag">Politics</span>
+      <span class="cause-tag">Poverty Alleviation</span>
+      <span class="cause-tag">Science & Technology</span>
+      <span class="cause-tag">Social Services</span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <h2>Full site coming soon<span style="color:var(--accent)">.</span></h2>
+    <p class="body-text" style="margin: 0 auto;">In the meantime, let's connect.</p>
+    <div class="cta-buttons">
+      <a href="https://www.linkedin.com/in/elias-tragas-a5642163/" target="_blank" class="btn btn-primary">LinkedIn →</a>
+    </div>
+  </div>
+
+  <footer>© 2026 Elias Tragas. All rights reserved.</footer>
+
+</div>
+
+<script>
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
